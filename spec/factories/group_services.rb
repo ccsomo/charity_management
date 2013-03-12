@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :group_service do
-    group_id 1
-    service_id 1
+    #group_id 1
+    #service_id 1
     members_served 1
   end
 end
