@@ -34,4 +34,12 @@ describe Place do
 		FactoryGirl.build(:place, city: nil).should_not be_valid
 	end
 
+	it "should destroy associated services" do 
+		@place.destroy 
+		[@service].each do |service| 
+			lambda do
+				Service.find(service) 
+			end.should raise_error(ActiveRecord::RecordNotFound) 
+		end 
+	end
 end

@@ -40,6 +40,11 @@ describe Service do
 	it { should respond_to :returned_survey}
 	it { should respond_to :trained}
 	it { should respond_to :willing_to_return}
+	it { should respond_to :group_services}
+	it { should respond_to :people}
+	it { should respond_to :place}
+	it { should respond_to :groups}
+	it { should respond_to :in_kind_donation}
 
 	it { should_not allow_mass_assignment_of :id }
 	it { should_not allow_mass_assignment_of :created_at }
@@ -70,5 +75,27 @@ describe Service do
 
 	it "is invalid when hours is null" do
 		FactoryGirl.build(:service, hours: nil).should_not be_valid
+	end
+
+	it "should destroy associated group_services" do 
+		@service.destroy 
+		[@group_service].each do |group_service| 
+			lambda do
+				GroupService.find(group_service) 
+			end.should raise_error(ActiveRecord::RecordNotFound) 
+		end 
+	end
+
+	pending "should destroy associated in_kind_donation", focus: true do 
+		in_kind_donation = FactoryGirl.create(:in_kind_donation, service_id: @service.id)
+		p InKindDonation.count
+		p in_kind_donation
+		p InKindDonation.find(in_kind_donation)
+		@service.destroy 
+		[in_kind_donation].each do |ikd| 
+			lambda do
+				InKindDonation.find(ikd) 
+			end.should raise_error(ActiveRecord::RecordNotFound) 
+		end 
 	end
 end
