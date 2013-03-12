@@ -2,10 +2,9 @@
 
 FactoryGirl.define do
   factory :address do
-    person_id 1
-    street "MyString"
-    city "MyString"
-    state "MyString"
-    zip "MyString"
+    street            "5600 N 17th St"
+    city              "Ozark"
+    state             "MO"
+    zip               "65721"
   end
 end

@@ -2,9 +2,8 @@
 
 FactoryGirl.define do
   factory :person do
-    first_name "MyString"
-    last_name "MyString"
-    representative_id 1
-    email "MyString"
+    first_name            "Brad"
+    last_name             "Rice"
+    email                 "brice@thermaldonkey.com"
   end
 end

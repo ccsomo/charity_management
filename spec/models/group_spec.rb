@@ -11,7 +11,7 @@
 
 require 'spec_helper'
 
-describe Group, focus: true do
+describe Group do
 	before { @group = FactoryGirl.create(:group) }
 
 	subject{ @group }
