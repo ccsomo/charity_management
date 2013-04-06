@@ -86,11 +86,8 @@ describe Service do
 		end 
 	end
 
-	pending "should destroy associated in_kind_donation", focus: true do 
+	it "should destroy associated in_kind_donation", focus: true do 
 		in_kind_donation = FactoryGirl.create(:in_kind_donation, service_id: @service.id)
-		p InKindDonation.count
-		p in_kind_donation
-		p InKindDonation.find(in_kind_donation)
 		@service.destroy 
 		[in_kind_donation].each do |ikd| 
 			lambda do
