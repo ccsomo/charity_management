@@ -10,7 +10,7 @@
 
 class Place < ActiveRecord::Base
   attr_accessible :city
-  has_many :services
+  has_many :services, dependent: :destroy
 
   validates_presence_of :city
 end

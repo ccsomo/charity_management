@@ -13,7 +13,7 @@ class CreateServices < ActiveRecord::Migration
       t.timestamps
     end
 
-    # Create a self-referencing foreign key
+    # Create a foreign key that references place.id
     execute <<-SQL
       ALTER TABLE services
         ADD CONSTRAINT fk_service_place
