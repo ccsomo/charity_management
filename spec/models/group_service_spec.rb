@@ -17,7 +17,7 @@ describe GroupService do
 		@place = FactoryGirl.create(:place)
 		@group = FactoryGirl.create(:group)
 		@service = FactoryGirl.create(:service, place_id: @place.id)
-		@group_service = FactoryGirl.create(:group_service, group_id: @group.id, service_id: @service.id) 
+		@group_service = GroupService.create(group_id: @group.id, service_id: @service.id, members_served: 4) 
 	end
 
 	subject{ @group_service }
@@ -41,14 +41,19 @@ describe GroupService do
 
 
 	it "is invalid when group_id is null" do
-		FactoryGirl.build(:group_service, group_id: nil).should_not be_valid
+		@group_service.group_id = nil
+		@group_service.should_not be_valid
 	end
 
 	it "is invalid when service_id is null" do
-		FactoryGirl.build(:group_service, service_id: nil).should_not be_valid
+		@group_service.service_id = nil
+		@group_service.should_not be_valid
+
 	end
 
 	it "is invalid when members_served is null" do
-		FactoryGirl.build(:group_service, service_id: nil).should_not be_valid
+		@group_service.members_served = nil
+		@group_service.should_not be_valid
+
 	end
 end

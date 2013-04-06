@@ -41,9 +41,9 @@ describe Group do
 	it "should destroy associated group_services" do 
 			place = FactoryGirl.create(:place)
 			service = FactoryGirl.create(:service, place_id: place.id)
-			group_services = FactoryGirl.create(:group_service, service_id: service.id, group_id: @group.id)
+			g_service = GroupService.create(service_id: service.id, group_id: @group.id, members_served: 4)
 			@group.destroy 
-			[group_services].each do |group_service| 
+			[g_service].each do |group_service| 
 				lambda do
 					GroupService.find(group_service) 
 				end.should raise_error(ActiveRecord::RecordNotFound) 
