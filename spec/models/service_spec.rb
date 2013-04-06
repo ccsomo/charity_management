@@ -24,7 +24,6 @@ describe Service do
 		@group = FactoryGirl.create(:group)
     @place.services.create(FactoryGirl.attributes_for(:service))
     @service = @place.services.first
-		# @group.services.create(FactoryGirl.attributes_for(:group_service), service_id: @service.id)
 		GroupService.create(service_id: @service.id, group_id: @group.id, members_served: 4)
 	end
 
