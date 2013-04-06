@@ -19,11 +19,13 @@
 require 'spec_helper'
 
 describe Service do
-	before do
+	before(:all) do
 		@place = FactoryGirl.create(:place)
 		@group = FactoryGirl.create(:group)
-		@service = FactoryGirl.create(:service, place_id: @place.id)
-		@group_service = FactoryGirl.create(:group_service, group_id: @group.id, service_id: @service.id) 
+    @place.services.create(FactoryGirl.attributes_for(:service))
+    @service = @place.services.first
+		# @group.services.create(FactoryGirl.attributes_for(:group_service), service_id: @service.id)
+		GroupService.create(service_id: @service.id, group_id: @group.id, members_served: 4)
 	end
 
 	subject{ @service }
@@ -86,13 +88,10 @@ describe Service do
 		end 
 	end
 
-	it "should destroy associated in_kind_donation", focus: true do 
-		in_kind_donation = FactoryGirl.create(:in_kind_donation, service_id: @service.id)
-		@service.destroy 
-		[in_kind_donation].each do |ikd| 
-			lambda do
-				InKindDonation.find(ikd) 
-			end.should raise_error(ActiveRecord::RecordNotFound) 
-		end 
+	it "should destroy associated in_kind_donation" do 
+		@service.create_in_kind_donation(FactoryGirl.attributes_for(:in_kind_donation))
+		@in_kind_donation = @service.in_kind_donation
+		@service.destroy
+		lambda { InKindDonation.find(@in_kind_donation) }.should raise_error(ActiveRecord::RecordNotFound)
 	end
 end

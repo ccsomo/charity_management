@@ -13,7 +13,7 @@
 
 require 'spec_helper'
 
-describe Person, focus: true do
+describe Person do
   before(:each) do
     @person = FactoryGirl.create(:person)
   end
@@ -138,10 +138,6 @@ describe Person, focus: true do
       @person.reload
       @person.represents.should eq []
     end
-
-    it "should description" do
-      pending "Check if this should be required"
-    end
   end
 
   describe "groups associations" do
@@ -202,5 +198,16 @@ describe Person, focus: true do
     it "should refer to the correct cash donations" do
       @person.cash_donations.should eq [@donation]
     end
+
+    it "should destroy associated cash_donations" do 
+      @donations = @person.cash_donations
+      @person.destroy 
+      @donations.each do |donation| 
+        lambda do
+          CashDonation.find(donation) 
+        end.should raise_error(ActiveRecord::RecordNotFound) 
+      end 
+    end
+
   end
 end

@@ -81,5 +81,15 @@ describe CashDonation do
     it "should refer to the correct group" do
       @donation.group.should eq @group
     end
+
+    it "should destroy associated cash_donations" do 
+      @donations = @group.cash_donations
+      @group.destroy 
+      @donations.each do |donation| 
+        lambda do
+          CashDonation.find(donation) 
+        end.should raise_error(ActiveRecord::RecordNotFound) 
+      end 
+    end
   end
 end

@@ -84,5 +84,10 @@ describe InKindDonation do
     it "should refer to the correct service" do
       @donation.service.should eq @service
     end
+
+    it "should destroy upon destruction of associated service" do
+      @service.destroy
+      lambda { InKindDonation.find(@donation) }.should raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 end
