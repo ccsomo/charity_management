@@ -18,31 +18,13 @@ describe Person do
     @person = FactoryGirl.create(:person)
   end
 
-  describe "first_name" do
+  describe "name" do
     it "is an attribute for a person" do
-      @person.should respond_to :first_name
+      @person.should respond_to :name
     end
 
     it "is an accessible attribute for a person" do
-      @person.should allow_mass_assignment_of :first_name
-    end
-
-    it "is present" do
-      pending "Check if this should be required"
-    end
-  end
-
-  describe "last_name" do
-    it "is an attribute for a person" do
-      @person.should respond_to :last_name
-    end
-
-    it "is an accessible attribute for a person" do
-      @person.should allow_mass_assignment_of :last_name
-    end
-
-    it "should description" do
-      pending "Check if this should be required"
+      @person.should allow_mass_assignment_of :name
     end
   end
 
@@ -70,6 +52,12 @@ describe Person do
         @person.should_not be_valid
       end
     end
+  end
+
+  it "should have email or name present" do
+    @person.name = nil
+    @person.email = nil
+    @person.should_not be_valid
   end
 
   describe "city" do
@@ -208,6 +196,5 @@ describe Person do
         end.should raise_error(ActiveRecord::RecordNotFound) 
       end 
     end
-
   end
 end
