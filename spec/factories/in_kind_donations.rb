@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :in_kind_donation, parent: :donation do
+    # type              "InKindDonation"
     description       "Food for thought...bot"
     dollar_value      9.99
   end

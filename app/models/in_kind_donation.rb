@@ -16,6 +16,8 @@
 #
 
 class InKindDonation < Donation
-  attr_accessible :description, :dollar_value, :donation_id, :service_id
+  attr_accessible :description, :dollar_value, :service_id
   belongs_to :service
+
+  validates_presence_of :description, :dollar_value
 end
