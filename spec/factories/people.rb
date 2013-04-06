@@ -2,8 +2,7 @@
 
 FactoryGirl.define do
   factory :person do
-    first_name            "Brad"
-    last_name             "Rice"
+    name            "Brad Rice"
     email                 "brice@thermaldonkey.com"
     street            	  "5600 N 17th St"
     city              	  "Ozark"

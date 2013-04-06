@@ -57,8 +57,7 @@ ActiveRecord::Schema.define(:version => 20130311022458) do
   add_index "groups_people", ["person_id", "group_id"], :name => "index_groups_people_on_person_id_and_group_id", :unique => true
 
   create_table "people", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "name"
     t.integer  "representative_id"
     t.string   "email"
     t.string   "street"
