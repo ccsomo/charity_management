@@ -13,7 +13,7 @@
 
 require 'spec_helper'
 
-describe Person do
+describe Person, focus: true do
   before(:each) do
     @person = FactoryGirl.create(:person)
   end
@@ -72,6 +72,44 @@ describe Person do
     end
   end
 
+  describe "city" do
+    it "is an attribute for a person" do
+      @person.should respond_to :city
+    end
+
+    it "is an accessible attribute for a person" do
+      @person.should allow_mass_assignment_of :city
+    end
+  end
+
+  describe "street" do
+    it "is an attribute for a person" do
+      @person.should respond_to :street
+    end
+
+    it "is an accessible attribute for a person" do
+      @person.should allow_mass_assignment_of :street
+    end
+  end
+  describe "state" do
+    it "is an attribute for a person" do
+      @person.should respond_to :state
+    end
+
+    it "is an accessible attribute for a person" do
+      @person.should allow_mass_assignment_of :state
+    end
+  end
+  describe "zip" do
+    it "is an attribute for a person" do
+      @person.should respond_to :zip
+    end
+
+    it "is an accessible attribute for a person" do
+      @person.should allow_mass_assignment_of :zip
+    end
+  end
+
   describe "representative associations" do
     before(:each) do
       @rep = FactoryGirl.create(:person)
@@ -103,20 +141,6 @@ describe Person do
 
     it "should description" do
       pending "Check if this should be required"
-    end
-  end
-
-  describe "address associations" do
-    before(:each) do
-      @address = FactoryGirl.create(:address, person: @person)
-    end
-
-    it "should have an address attribute" do
-      @person.should respond_to :address
-    end
-
-    it "should refer to the correct address" do
-      @person.address.should eq @address
     end
   end
 
