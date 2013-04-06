@@ -5,5 +5,9 @@ FactoryGirl.define do
     first_name            "Brad"
     last_name             "Rice"
     email                 "brice@thermaldonkey.com"
+    street            	  "5600 N 17th St"
+    city              	  "Ozark"
+    state             	  "MO"
+    zip                   "65721"
   end
 end

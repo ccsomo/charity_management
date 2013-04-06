@@ -13,18 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130311022458) do
 
-  create_table "addresses", :force => true do |t|
-    t.integer  "person_id",                :null => false
-    t.string   "street"
-    t.string   "city"
-    t.string   "state",      :limit => 2
-    t.string   "zip",        :limit => 11
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
-  end
-
-  add_index "addresses", ["person_id"], :name => "index_addresses_on_person_id", :unique => true
-
   create_table "donations", :force => true do |t|
     t.date     "date",                                        :null => false
     t.string   "type"
@@ -73,8 +61,12 @@ ActiveRecord::Schema.define(:version => 20130311022458) do
     t.string   "last_name"
     t.integer  "representative_id"
     t.string   "email"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.string   "street"
+    t.string   "city"
+    t.string   "state",             :limit => 2
+    t.string   "zip",               :limit => 11
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   add_index "people", ["representative_id"], :name => "fk_people_representatives"

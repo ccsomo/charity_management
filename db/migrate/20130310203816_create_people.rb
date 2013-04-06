@@ -4,6 +4,10 @@ class CreatePeople < ActiveRecord::Migration
       t.string :name
       t.integer :representative_id
       t.string :email
+      t.string :street
+      t.string :city
+      t.column :state, "char(2)"
+      t.string :zip, limit: 11
       t.timestamps
     end
 
