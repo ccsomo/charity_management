@@ -18,7 +18,7 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :skills
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :services
-  has_many :cash_donations
+  has_many :cash_donations, dependent: :destroy
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

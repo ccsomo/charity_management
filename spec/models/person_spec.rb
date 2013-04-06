@@ -202,5 +202,14 @@ describe Person, focus: true do
     it "should refer to the correct cash donations" do
       @person.cash_donations.should eq [@donation]
     end
+
+    it "should delete associated cash_donation" do
+      @person.destroy
+      [@donation].each do |donation|
+        lambda do
+          CashDonation.find(donation)
+        end.should raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 end
