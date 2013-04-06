@@ -1,4 +1,18 @@
 CharityManagement::Application.routes.draw do
+  get "person/new"
+
+  get "person/edit"
+
+  get "person/update"
+
+  get "person/index"
+
+  get "person/show"
+
+  get "person/create"
+
+  get "person/destroy"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

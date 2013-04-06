@@ -48,12 +48,10 @@ describe GroupService do
 	it "is invalid when service_id is null" do
 		@group_service.service_id = nil
 		@group_service.should_not be_valid
-
 	end
 
 	it "is invalid when members_served is null" do
 		@group_service.members_served = nil
 		@group_service.should_not be_valid
-
 	end
 end
