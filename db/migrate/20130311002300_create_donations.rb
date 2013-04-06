@@ -48,13 +48,28 @@ class CreateDonations < ActiveRecord::Migration
       create trigger valid_donation
         after insert on donations
         for each row begin
-          if new.type = 'CashDonation' and (new.person_id is null and new.group_id is null) or new.amount is null then
-            delete from donations where id = new.id;
-          elseif new.type = 'InKindDonation' and (new.service_id is null or new.description is null or new.amount is null) then
-            delete from donations where id = new.id;
-          elseif new.type not in ('CashDonation', 'InKindDonation') then
-            delete from donations where id = new.id;
-          end if;
+          # if new.type = 'CashDonation' and (new.person_id is null and new.group_id is null) or new.amount is null then
+          #   delete from donations where id = new.id;
+          #   # SIGNAL sqlstate '45001' set message_text = "Cannot set a cash donation without owner and amount!";
+          # elseif new.type = 'InKindDonation' and (new.service_id is null or new.description is null or new.amount is null) then
+          #   delete from donations where id = new.id;
+          #   # SIGNAL sqlstate '45002' set message_text = "Cannot set in-kind donation without service, description, and value!";
+          # elseif new.type not in ('CashDonation', 'InKindDonation') then
+          #   delete from donations where id = new.id;
+          #   # SIGNAL sqlstate '45003' set message_text = "Invalid Donation type!";
+          # end if;
+          case new.type
+          when 'CashDonation' then
+            if (new.person_id is null and new.group_id is null) or new.amount is null then
+              SIGNAL sqlstate '45001' set message_text = "Cannot set a cash donation without owner and amount!";
+            end if;
+          when 'InKindDonation' then
+            if (new.service_id is null or new.description is null or new.dollar_value is null) then
+              SIGNAL sqlstate '45002' set message_text = "Cannot set in-kind donation without service, description, and value!";
+            end if;
+          else
+            SIGNAL sqlstate '45003' set message_text = "Invalid Donation type!";
+          end case;
       end;
     SQL
   end

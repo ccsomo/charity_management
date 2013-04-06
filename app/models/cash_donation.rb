@@ -16,7 +16,10 @@
 #
 
 class CashDonation < Donation
-  attr_accessible :amount, :donation_id, :group_id, :person_id
+  attr_accessible :amount
   belongs_to :person
   belongs_to :group
+
+  validates_presence_of :date
+  validates_presence_of :amount
 end

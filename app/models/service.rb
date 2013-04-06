@@ -22,7 +22,7 @@ class Service < ActiveRecord::Base
   has_many :group_services
   has_many :groups, through: :group_services
   belongs_to :place
-  has_one :in_kind_donation
+  has_one :in_kind_donation, dependent: :destroy
 
   validates_presence_of :date
   validates_presence_of :place_id
