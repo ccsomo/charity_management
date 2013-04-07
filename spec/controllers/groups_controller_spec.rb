@@ -24,7 +24,7 @@ describe GroupsController do
   # Group. As you add validations to Group, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {  }
+    { name: "Super heroes" }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -36,7 +36,7 @@ describe GroupsController do
 
   describe "GET index" do
     it "assigns all groups as @groups" do
-      group = Group.create! valid_attributes
+      group = FactoryGirl.create(:group)
       get :index, {}, valid_session
       assigns(:groups).should eq([group])
     end
@@ -44,7 +44,7 @@ describe GroupsController do
 
   describe "GET show" do
     it "assigns the requested group as @group" do
-      group = Group.create! valid_attributes
+      group = FactoryGirl.create(:group)
       get :show, {:id => group.to_param}, valid_session
       assigns(:group).should eq(group)
     end
@@ -59,7 +59,7 @@ describe GroupsController do
 
   describe "GET edit" do
     it "assigns the requested group as @group" do
-      group = Group.create! valid_attributes
+      group = FactoryGirl.create(:group)
       get :edit, {:id => group.to_param}, valid_session
       assigns(:group).should eq(group)
     end
@@ -105,8 +105,8 @@ describe GroupsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested group" do
-        group = Group.create! valid_attributes
-        # Assuming there are no other groups in the database, this
+        group = FactoryGirl.create(:group)
+          # Assuming there are no other groups in the database, this
         # specifies that the Group created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
@@ -115,30 +115,30 @@ describe GroupsController do
       end
 
       it "assigns the requested group as @group" do
-        group = Group.create! valid_attributes
-        put :update, {:id => group.to_param, :group => valid_attributes}, valid_session
+        group = FactoryGirl.create(:group)
+          put :update, {:id => group.to_param, :group => valid_attributes}, valid_session
         assigns(:group).should eq(group)
       end
 
       it "redirects to the group" do
-        group = Group.create! valid_attributes
-        put :update, {:id => group.to_param, :group => valid_attributes}, valid_session
+        group = FactoryGirl.create(:group)
+          put :update, {:id => group.to_param, :group => valid_attributes}, valid_session
         response.should redirect_to(group)
       end
     end
 
     describe "with invalid params" do
       it "assigns the group as @group" do
-        group = Group.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        group = FactoryGirl.create(:group)
+          # Trigger the behavior that occurs when invalid params are submitted
         Group.any_instance.stub(:save).and_return(false)
         put :update, {:id => group.to_param, :group => {  }}, valid_session
         assigns(:group).should eq(group)
       end
 
       it "re-renders the 'edit' template" do
-        group = Group.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        group = FactoryGirl.create(:group)
+          # Trigger the behavior that occurs when invalid params are submitted
         Group.any_instance.stub(:save).and_return(false)
         put :update, {:id => group.to_param, :group => {  }}, valid_session
         response.should render_template("edit")
@@ -148,14 +148,14 @@ describe GroupsController do
 
   describe "DELETE destroy" do
     it "destroys the requested group" do
-      group = Group.create! valid_attributes
+      group = FactoryGirl.create(:group)
       expect {
         delete :destroy, {:id => group.to_param}, valid_session
       }.to change(Group, :count).by(-1)
     end
 
     it "redirects to the groups list" do
-      group = Group.create! valid_attributes
+      group = FactoryGirl.create(:group)
       delete :destroy, {:id => group.to_param}, valid_session
       response.should redirect_to(groups_url)
     end

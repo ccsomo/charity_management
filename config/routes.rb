@@ -1,17 +1,13 @@
 CharityManagement::Application.routes.draw do
-  get "person/new"
 
-  get "person/edit"
-
-  get "person/update"
-
-  get "person/index"
-
-  get "person/show"
-
-  get "person/create"
-
-  get "person/destroy"
+  resources :people
+  resources :groups
+  resources :places
+  resources :services
+  resources :skills
+  resources :donations
+  resources :cash_donations, controller: "donations", type: "CashDonation"
+  resources :in_kind_donations, controller: "donations", type: "InKindDonation"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

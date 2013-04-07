@@ -24,7 +24,7 @@ describe PlacesController do
   # Place. As you add validations to Place, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {  }
+    { city: "Springfield" }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -36,7 +36,7 @@ describe PlacesController do
 
   describe "GET index" do
     it "assigns all places as @places" do
-      place = Place.create! valid_attributes
+      place = FactoryGirl.create(:place)
       get :index, {}, valid_session
       assigns(:places).should eq([place])
     end
@@ -44,7 +44,7 @@ describe PlacesController do
 
   describe "GET show" do
     it "assigns the requested place as @place" do
-      place = Place.create! valid_attributes
+      place = FactoryGirl.create(:place)
       get :show, {:id => place.to_param}, valid_session
       assigns(:place).should eq(place)
     end
@@ -59,7 +59,7 @@ describe PlacesController do
 
   describe "GET edit" do
     it "assigns the requested place as @place" do
-      place = Place.create! valid_attributes
+      place = FactoryGirl.create(:place)
       get :edit, {:id => place.to_param}, valid_session
       assigns(:place).should eq(place)
     end
@@ -105,8 +105,8 @@ describe PlacesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested place" do
-        place = Place.create! valid_attributes
-        # Assuming there are no other places in the database, this
+        place = FactoryGirl.create(:place)
+          # Assuming there are no other places in the database, this
         # specifies that the Place created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
@@ -115,30 +115,30 @@ describe PlacesController do
       end
 
       it "assigns the requested place as @place" do
-        place = Place.create! valid_attributes
-        put :update, {:id => place.to_param, :place => valid_attributes}, valid_session
+        place = FactoryGirl.create(:place)
+          put :update, {:id => place.to_param, :place => valid_attributes}, valid_session
         assigns(:place).should eq(place)
       end
 
       it "redirects to the place" do
-        place = Place.create! valid_attributes
-        put :update, {:id => place.to_param, :place => valid_attributes}, valid_session
+        place = FactoryGirl.create(:place)
+          put :update, {:id => place.to_param, :place => valid_attributes}, valid_session
         response.should redirect_to(place)
       end
     end
 
     describe "with invalid params" do
       it "assigns the place as @place" do
-        place = Place.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        place = FactoryGirl.create(:place)
+          # Trigger the behavior that occurs when invalid params are submitted
         Place.any_instance.stub(:save).and_return(false)
         put :update, {:id => place.to_param, :place => {  }}, valid_session
         assigns(:place).should eq(place)
       end
 
       it "re-renders the 'edit' template" do
-        place = Place.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        place = FactoryGirl.create(:place)
+          # Trigger the behavior that occurs when invalid params are submitted
         Place.any_instance.stub(:save).and_return(false)
         put :update, {:id => place.to_param, :place => {  }}, valid_session
         response.should render_template("edit")
@@ -148,14 +148,14 @@ describe PlacesController do
 
   describe "DELETE destroy" do
     it "destroys the requested place" do
-      place = Place.create! valid_attributes
+      place = FactoryGirl.create(:place)
       expect {
         delete :destroy, {:id => place.to_param}, valid_session
       }.to change(Place, :count).by(-1)
     end
 
     it "redirects to the places list" do
-      place = Place.create! valid_attributes
+      place = FactoryGirl.create(:place)
       delete :destroy, {:id => place.to_param}, valid_session
       response.should redirect_to(places_url)
     end

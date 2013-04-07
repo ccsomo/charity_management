@@ -27,4 +27,5 @@ class Service < ActiveRecord::Base
   validates_presence_of :date
   validates_presence_of :place_id
   validates_presence_of :hours
+  validates_presence_of :description
 end

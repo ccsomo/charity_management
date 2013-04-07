@@ -24,7 +24,8 @@ describe ServicesController do
   # Service. As you add validations to Service, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {  }
+    place = FactoryGirl.create(:place)
+    { date: "2013-04-01", place_id: place.id, hours: 5, description: "Construct a database" }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -36,7 +37,7 @@ describe ServicesController do
 
   describe "GET index" do
     it "assigns all services as @services" do
-      service = Service.create! valid_attributes
+      service = FactoryGirl.create(:service, valid_attributes)
       get :index, {}, valid_session
       assigns(:services).should eq([service])
     end
@@ -44,7 +45,7 @@ describe ServicesController do
 
   describe "GET show" do
     it "assigns the requested service as @service" do
-      service = Service.create! valid_attributes
+      service = FactoryGirl.create(:service, valid_attributes)
       get :show, {:id => service.to_param}, valid_session
       assigns(:service).should eq(service)
     end
@@ -59,7 +60,7 @@ describe ServicesController do
 
   describe "GET edit" do
     it "assigns the requested service as @service" do
-      service = Service.create! valid_attributes
+      service = FactoryGirl.create(:service, valid_attributes)
       get :edit, {:id => service.to_param}, valid_session
       assigns(:service).should eq(service)
     end
@@ -105,8 +106,8 @@ describe ServicesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested service" do
-        service = Service.create! valid_attributes
-        # Assuming there are no other services in the database, this
+        service = FactoryGirl.create(:service, valid_attributes)
+          # Assuming there are no other services in the database, this
         # specifies that the Service created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
@@ -115,30 +116,30 @@ describe ServicesController do
       end
 
       it "assigns the requested service as @service" do
-        service = Service.create! valid_attributes
-        put :update, {:id => service.to_param, :service => valid_attributes}, valid_session
+        service = FactoryGirl.create(:service, valid_attributes)
+          put :update, {:id => service.to_param, :service => valid_attributes}, valid_session
         assigns(:service).should eq(service)
       end
 
       it "redirects to the service" do
-        service = Service.create! valid_attributes
-        put :update, {:id => service.to_param, :service => valid_attributes}, valid_session
+        service = FactoryGirl.create(:service, valid_attributes)
+          put :update, {:id => service.to_param, :service => valid_attributes}, valid_session
         response.should redirect_to(service)
       end
     end
 
     describe "with invalid params" do
       it "assigns the service as @service" do
-        service = Service.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        service = FactoryGirl.create(:service, valid_attributes)
+          # Trigger the behavior that occurs when invalid params are submitted
         Service.any_instance.stub(:save).and_return(false)
         put :update, {:id => service.to_param, :service => {  }}, valid_session
         assigns(:service).should eq(service)
       end
 
       it "re-renders the 'edit' template" do
-        service = Service.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        service = FactoryGirl.create(:service, valid_attributes)
+          # Trigger the behavior that occurs when invalid params are submitted
         Service.any_instance.stub(:save).and_return(false)
         put :update, {:id => service.to_param, :service => {  }}, valid_session
         response.should render_template("edit")
@@ -148,14 +149,14 @@ describe ServicesController do
 
   describe "DELETE destroy" do
     it "destroys the requested service" do
-      service = Service.create! valid_attributes
+      service = FactoryGirl.create(:service, valid_attributes)
       expect {
         delete :destroy, {:id => service.to_param}, valid_session
       }.to change(Service, :count).by(-1)
     end
 
     it "redirects to the services list" do
-      service = Service.create! valid_attributes
+      service = FactoryGirl.create(:service, valid_attributes)
       delete :destroy, {:id => service.to_param}, valid_session
       response.should redirect_to(services_url)
     end

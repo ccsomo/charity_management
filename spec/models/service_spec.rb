@@ -22,9 +22,12 @@ describe Service do
 	before(:all) do
 		@place = FactoryGirl.create(:place)
 		@group = FactoryGirl.create(:group)
+	end
+
+	before(:each) do
     @place.services.create(FactoryGirl.attributes_for(:service))
     @service = @place.services.first
-		GroupService.create(service_id: @service.id, group_id: @group.id, members_served: 4)
+		GroupService.create(service_id: @service.id, group_id: @group.id, members_served: 4)	  
 	end
 
 	subject{ @service }
@@ -67,15 +70,23 @@ describe Service do
 	it { should have_one :in_kind_donation }
 
 	it "is invalid when date is null" do
-		FactoryGirl.build(:service, date: nil).should_not be_valid
+		@service.date = nil
+		@service.should_not be_valid
 	end
 
 	it "is invalid when place_id is null" do
-		FactoryGirl.build(:service, place_id: nil).should_not be_valid
+		@service.place_id = nil
+		@service.should_not be_valid
 	end
 
 	it "is invalid when hours is null" do
-		FactoryGirl.build(:service, hours: nil).should_not be_valid
+		@service.hours = nil
+		@service.should_not be_valid
+	end
+
+	it "is invalid when description is null" do
+		@service.description = nil
+		@service.should_not be_valid
 	end
 
 	it "should destroy associated group_services" do 

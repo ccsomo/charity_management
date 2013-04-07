@@ -3,6 +3,7 @@ class DonationsController < ApplicationController
   # GET /donations.json
   def index
     @donations = Donation.all
+    # @donations = donation_type.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class DonationsController < ApplicationController
   # GET /donations/1.json
   def show
     @donation = Donation.find(params[:id])
+    # @donation = donation_type.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,7 @@ class DonationsController < ApplicationController
   # GET /donations/new.json
   def new
     @donation = Donation.new
+    # @donation.type = params[:type]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -80,4 +83,9 @@ class DonationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # private
+  #   def donation_type
+  #     params[:type].constantize
+  #   end
 end

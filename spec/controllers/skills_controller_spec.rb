@@ -24,7 +24,7 @@ describe SkillsController do
   # Skill. As you add validations to Skill, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {  }
+    { description: "Being awesome" }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -36,7 +36,7 @@ describe SkillsController do
 
   describe "GET index" do
     it "assigns all skills as @skills" do
-      skill = Skill.create! valid_attributes
+      skill = FactoryGirl.create(:skill)
       get :index, {}, valid_session
       assigns(:skills).should eq([skill])
     end
@@ -44,7 +44,7 @@ describe SkillsController do
 
   describe "GET show" do
     it "assigns the requested skill as @skill" do
-      skill = Skill.create! valid_attributes
+      skill = FactoryGirl.create(:skill)
       get :show, {:id => skill.to_param}, valid_session
       assigns(:skill).should eq(skill)
     end
@@ -59,7 +59,7 @@ describe SkillsController do
 
   describe "GET edit" do
     it "assigns the requested skill as @skill" do
-      skill = Skill.create! valid_attributes
+      skill = FactoryGirl.create(:skill)
       get :edit, {:id => skill.to_param}, valid_session
       assigns(:skill).should eq(skill)
     end
@@ -105,8 +105,8 @@ describe SkillsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested skill" do
-        skill = Skill.create! valid_attributes
-        # Assuming there are no other skills in the database, this
+        skill = FactoryGirl.create(:skill)
+          # Assuming there are no other skills in the database, this
         # specifies that the Skill created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
@@ -115,30 +115,30 @@ describe SkillsController do
       end
 
       it "assigns the requested skill as @skill" do
-        skill = Skill.create! valid_attributes
-        put :update, {:id => skill.to_param, :skill => valid_attributes}, valid_session
+        skill = FactoryGirl.create(:skill)
+          put :update, {:id => skill.to_param, :skill => valid_attributes}, valid_session
         assigns(:skill).should eq(skill)
       end
 
       it "redirects to the skill" do
-        skill = Skill.create! valid_attributes
-        put :update, {:id => skill.to_param, :skill => valid_attributes}, valid_session
+        skill = FactoryGirl.create(:skill)
+          put :update, {:id => skill.to_param, :skill => valid_attributes}, valid_session
         response.should redirect_to(skill)
       end
     end
 
     describe "with invalid params" do
       it "assigns the skill as @skill" do
-        skill = Skill.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        skill = FactoryGirl.create(:skill)
+          # Trigger the behavior that occurs when invalid params are submitted
         Skill.any_instance.stub(:save).and_return(false)
         put :update, {:id => skill.to_param, :skill => {  }}, valid_session
         assigns(:skill).should eq(skill)
       end
 
       it "re-renders the 'edit' template" do
-        skill = Skill.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        skill = FactoryGirl.create(:skill)
+          # Trigger the behavior that occurs when invalid params are submitted
         Skill.any_instance.stub(:save).and_return(false)
         put :update, {:id => skill.to_param, :skill => {  }}, valid_session
         response.should render_template("edit")
@@ -148,14 +148,14 @@ describe SkillsController do
 
   describe "DELETE destroy" do
     it "destroys the requested skill" do
-      skill = Skill.create! valid_attributes
+      skill = FactoryGirl.create(:skill)
       expect {
         delete :destroy, {:id => skill.to_param}, valid_session
       }.to change(Skill, :count).by(-1)
     end
 
     it "redirects to the skills list" do
-      skill = Skill.create! valid_attributes
+      skill = FactoryGirl.create(:skill)
       delete :destroy, {:id => skill.to_param}, valid_session
       response.should redirect_to(skills_url)
     end

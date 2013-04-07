@@ -20,7 +20,7 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :services
   has_many :cash_donations, dependent: :destroy
   validate :either_name_or_email
-  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z|^$/i
 
   validates_format_of :email, with: EMAIL_REGEX
 
