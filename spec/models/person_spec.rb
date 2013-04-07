@@ -52,6 +52,12 @@ describe Person do
         @person.should_not be_valid
       end
     end
+
+    it "can be nil" do
+      @person.name = "David Hahn"
+      @person.email = nil
+      @person.should be_valid
+    end
   end
 
   it "should have email or name present" do
@@ -161,7 +167,7 @@ describe Person do
   describe "services associations" do
     before(:each) do
       @place = FactoryGirl.create(:place)
-      @service = @place.services.create(FactoryGirl.attributes_for(:service))
+      @service = FactoryGirl.create(:service, place: @place) 
     end
 
     it "should have a services attribute" do
@@ -176,7 +182,7 @@ describe Person do
 
   describe "cash_donations associations" do
     before(:each) do
-      @donation = @person.cash_donations.create(FactoryGirl.attributes_for(:cash_donation))
+      @donation = FactoryGirl.create(:cash_donation, person_id: @person.id)
     end
 
     it "should have a cash_donations attribute" do

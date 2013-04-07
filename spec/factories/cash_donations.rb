@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :cash_donation, parent: :donation do
+		type					"CashDonation"
     amount        9.99
   end
 end

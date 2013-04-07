@@ -25,9 +25,9 @@ describe Service do
 	end
 
 	before(:each) do
-    @place.services.create(FactoryGirl.attributes_for(:service))
+		FactoryGirl.create(:service, place: @place)
     @service = @place.services.first
-		GroupService.create(service_id: @service.id, group_id: @group.id, members_served: 4)	  
+		FactoryGirl.create(:group_service, service_id: @service.id, group_id: @group.id)	  
 	end
 
 	subject{ @service }
