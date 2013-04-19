@@ -13,8 +13,15 @@
     =f.label :name
     =f.text_field :name
     %br
-    =f.label :representative_id
-    =f.text_field :representative_id
+    =f.label :representative
+    =f.collection_select(:representative_id, Person.all, :id, :name, include_blank: true)
+    %br
+    =f.label :represents, "Represents:"
+    = hidden_field_tag "person[represent_ids][]", nil
+    - Person.all.each do |person|
+      %label.checkbox
+        = person.name
+        = check_box_tag "person[represent_ids][]", person.id, person.represent_ids.include?(person.id), id: dom_id(person)
     %br
     =f.label :street
     =f.text_field :street
