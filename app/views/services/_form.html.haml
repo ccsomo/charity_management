@@ -5,6 +5,32 @@
       %ul
         - @service.errors.full_messages.each do |msg|
           %li= msg
-
+  .controls
+    = f.label :date
+    = f.text_field :date
+    %br
+    = f.label :description
+    = f.text_field :description
+    %br
+    = f.label :hours
+    = f.text_field :hours
+    %br
+    = f.label :notes
+    = f.text_field :notes
+    %br
+    %label.checkbox
+      Return Survey
+      = f.check_box :returned_survey
+    %br
+    %label.checkbox
+      Sent Survey
+      = f.check_box :sent_survey
+    %br
+    %label.checkbox
+      Trained
+      = f.check_box :trained
+    %br
+    =f.collection_select(:place_id, Place.all, :id, :city)
+    =render partial: "shared/habtm_form", locals: {object: @service, association: "person", attribute: "name"}
   .actions
     = f.submit 'Save'
