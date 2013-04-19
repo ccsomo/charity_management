@@ -5,6 +5,8 @@
       %ul
         - @place.errors.full_messages.each do |msg|
           %li= msg
-
+  .controls
+    = f.label :city
+    = f.text_field :city
   .actions
     = f.submit 'Save'

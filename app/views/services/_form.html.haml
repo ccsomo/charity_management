@@ -31,6 +31,7 @@
       = f.check_box :trained
     %br
     =f.collection_select(:place_id, Place.all, :id, :city)
+    %h3 People
     =render partial: "shared/habtm_form", locals: {object: @service, association: "person", attribute: "name"}
   .actions
     = f.submit 'Save'
