@@ -12,7 +12,7 @@
 #
 
 class Person < ActiveRecord::Base
-  attr_accessible :email, :name, :city, :state, :street, :zip
+  attr_accessible :email, :name, :city, :state, :street, :zip, :skill_ids, :group_ids, :service_ids
   belongs_to :representative, class_name: "Person", foreign_key: :representative_id
   has_many :represents, class_name: "Person", foreign_key: :representative_id
   has_and_belongs_to_many :skills

@@ -5,6 +5,14 @@
       %ul
         - @group.errors.full_messages.each do |msg|
           %li= msg
-
+  .controls
+    =f.label :name
+    =f.text_field :name
+    %br
+    =f.label :members
+    =f.text_field :members
+    %br
+    %h3 People
+    =render partial: "shared/habtm_form", locals: {object: @group, association: "person", attribute: "name"}
   .actions
     = f.submit 'Save'

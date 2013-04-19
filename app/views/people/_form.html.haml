@@ -31,7 +31,7 @@
     %h3 Skills
     =render partial: "shared/habtm_form", locals: {object: @person, association: "skill", attribute: "description"}
     %h3 Groups
-    =render partial: "shared/habtm_form", locals: {object: @person, association: "group", attribute: "description"}
+    =render partial: "shared/habtm_form", locals: {object: @person, association: "group", attribute: "name"}
     %h3 Services
     =render partial: "shared/habtm_form", locals: {object: @person, association: "service", attribute: "description"}
 
