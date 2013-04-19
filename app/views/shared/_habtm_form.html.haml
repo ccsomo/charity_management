@@ -1,0 +1,6 @@
+-object_class = object.class.to_s.downcase
+= hidden_field_tag "#{object_class}[#{association}_ids][]", nil
+- Module.const_get(association.capitalize).all.each do |assoc|
+  %label.checkbox
+    = assoc.name
+    = check_box_tag "#{object_class}[#{association}_ids][]", assoc.id, object.send(association+"_ids").include?(assoc.id), id: dom_id(assoc)

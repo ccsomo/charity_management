@@ -5,6 +5,35 @@
       %ul
         - @person.errors.full_messages.each do |msg|
           %li= msg
+  .controls
+    %br
+    =f.label :email
+    =f.text_field :email
+    %br
+    =f.label :name
+    =f.text_field :name
+    %br
+    =f.label :representative_id
+    =f.text_field :representative_id
+    %br
+    =f.label :street
+    =f.text_field :street
+    %br
+    =f.label :city
+    =f.text_field :city
+    %br
+    =f.label :state
+    =f.text_field :state
+    %br
+    =f.label :zip
+    =f.text_field :zip
+    %br
+    %h3 Skills
+    =render partial: "shared/habtm_form", locals: {object: @person, association: "skill"}
+    %h3 Groups
+    =render partial: "shared/habtm_form", locals: {object: @person, association: "group"}
+    %h3 Services
+    =render partial: "shared/habtm_form", locals: {object: @person, association: "service"}
 
   .actions
     = f.submit 'Save'
