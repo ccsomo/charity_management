@@ -29,11 +29,11 @@
     =f.text_field :zip
     %br
     %h3 Skills
-    =render partial: "shared/habtm_form", locals: {object: @person, association: "skill"}
+    =render partial: "shared/habtm_form", locals: {object: @person, association: "skill", attribute: "description"}
     %h3 Groups
-    =render partial: "shared/habtm_form", locals: {object: @person, association: "group"}
+    =render partial: "shared/habtm_form", locals: {object: @person, association: "group", attribute: "description"}
     %h3 Services
-    =render partial: "shared/habtm_form", locals: {object: @person, association: "service"}
+    =render partial: "shared/habtm_form", locals: {object: @person, association: "service", attribute: "description"}
 
   .actions
     = f.submit 'Save'

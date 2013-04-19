@@ -9,7 +9,7 @@
 #
 
 class Skill < ActiveRecord::Base
-  attr_accessible :description
+  attr_accessible :description, :person_ids
   has_and_belongs_to_many :people
   validates_presence_of :description
 end
