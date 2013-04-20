@@ -12,6 +12,13 @@
     =f.label :members
     =f.text_field :members
     %br
+    %h2 Cash Donations
+    - i = -1
+    = f.fields_for(:cash_donations) do |donation_form|
+      - i += 1
+      = render partial: "shared/cash_donation_fields", :locals => {:f => donation_form}
+    = link_to_add_fields "Add Cash Donation", f, :cash_donations
+    %br
     %h3 People
     =render partial: "shared/habtm_form", locals: {object: @group, association: "person", attribute: "name"}
   .actions
