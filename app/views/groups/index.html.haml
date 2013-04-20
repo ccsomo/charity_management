@@ -2,12 +2,14 @@
 
 %table
   %tr
-    %th
-    %th
-    %th
+    %th Name
+    %th Members not in this application
+    %th Actions
 
   - @groups.each do |group|
     %tr
+      %td= group.name
+      %td= group.members
       %td= link_to 'Show', group
       %td= link_to 'Edit', edit_group_path(group)
       %td= link_to 'Destroy', group, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -25,6 +25,10 @@ class Person < ActiveRecord::Base
 
   validates_format_of :email, with: EMAIL_REGEX
 
+  def composite_address
+    "#{street} #{city}, #{state} #{zip}"
+  end
+
   private
     def either_name_or_email
       if self.name.blank? and self.email.blank?

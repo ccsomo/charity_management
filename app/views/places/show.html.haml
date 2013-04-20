@@ -1,5 +1,13 @@
+%h1 Place Show Page
+
 %p#notice= notice
 
+=@place.city
+%br
+%h4 Services
+%ul
+  -@place.services.each do |service|
+    %li=service.description
 
 = link_to 'Edit', edit_place_path(@place)
 \|

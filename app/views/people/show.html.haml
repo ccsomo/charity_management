@@ -1,4 +1,20 @@
+%h1 Person Show Page
+
 %p#notice= notice
+
+=@person.name
+%br
+=@person.email
+%br
+=@person.composite_address
+%br
+%h4 Representative
+=@person.representative.name unless @person.representative.nil?
+%br
+%h4 Represents
+%ul
+  -@person.represents.each do |rep|
+    %li=rep.name
 
 
 = link_to 'Edit', edit_person_path(@person)

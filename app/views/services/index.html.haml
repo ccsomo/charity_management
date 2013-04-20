@@ -2,12 +2,24 @@
 
 %table
   %tr
-    %th
-    %th
-    %th
+    %th Date
+    %th Description
+    %th Hours
+    %th Sent Survey?
+    %th Returned Survey?
+    %th Trained?
+    %th Returning?
+    %th Actions
 
   - @services.each do |service|
     %tr
+      %td= service.date
+      %td= service.description
+      %td= service.hours
+      %td= service.sent_survey ? "Yes" : "No"
+      %td= service.returned_survey ? "Yes" : "No"
+      %td= service.trained ? "Yes" : "No"
+      %td= service.willing_to_return ? "Yes" : "No"
       %td= link_to 'Show', service
       %td= link_to 'Edit', edit_service_path(service)
       %td= link_to 'Destroy', service, :method => :delete, :data => { :confirm => 'Are you sure?' }

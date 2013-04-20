@@ -2,12 +2,18 @@
 
 %table
   %tr
-    %th
-    %th
-    %th
+    %th Name
+    %th Email
+    %th Address
+    %th Representative
+    %th Actions
 
   - @people.each do |person|
     %tr
+      %td= person.name
+      %td= person.email
+      %td= person.composite_address
+      %td= person.representative.name unless person.representative.nil?
       %td= link_to 'Show', person
       %td= link_to 'Edit', edit_person_path(person)
       %td= link_to 'Destroy', person, :method => :delete, :data => { :confirm => 'Are you sure?' }

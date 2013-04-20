@@ -1,5 +1,41 @@
+%h1 Service Show Page
+
 %p#notice= notice
 
+=@service.date
+%br
+=@service.description
+%br
+=@service.hours
+%br
+%h4 Sent Survey?
+=@service.sent_survey ? "Yes" : "No"
+%br
+%h4 Returned Survey?
+=@service.returned_survey ? "Yes" : "No"
+%br
+%h4 Trained?
+=@service.trained ? "Yes" : "No"
+%br
+%h4 Returning?
+=@service.willing_to_return ? "Yes" : "No"
+%br
+%h4 Notes
+=@service.notes
+%h4 People
+%ul
+  -@service.people.each do |person|
+    %li=person.name
+%br
+%h4 Groups
+%ul
+  -@service.groups.each do |group|
+    %li=group.name
+%br
+%h4 Donation
+- unless @service.in_kind_donation.nil?
+  =@service.in_kind_donation.description
+  =@service.in_kind_donation.dollar_value
 
 = link_to 'Edit', edit_service_path(@service)
 \|

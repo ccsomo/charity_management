@@ -1,5 +1,13 @@
+%h1 Skill Show Page
+
 %p#notice= notice
 
+=@skill.description
+%br
+%h4 People
+%ul
+  -@skill.people.each do |person|
+    %li=person.name
 
 = link_to 'Edit', edit_skill_path(@skill)
 \|

@@ -1,5 +1,15 @@
+%h1 Group Show Page
+
 %p#notice= notice
 
+=@group.name
+%br
+=@group.members
+%br
+%h4 Members in this application
+%ul
+  -@group.people.each do |person|
+    %li=person.name
 
 = link_to 'Edit', edit_group_path(@group)
 \|

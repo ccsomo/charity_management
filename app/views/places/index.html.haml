@@ -2,12 +2,12 @@
 
 %table
   %tr
-    %th
-    %th
-    %th
+    %th City
+    %th Actions
 
   - @places.each do |place|
     %tr
+      %td= place.city
       %td= link_to 'Show', place
       %td= link_to 'Edit', edit_place_path(place)
       %td= link_to 'Destroy', place, :method => :delete, :data => { :confirm => 'Are you sure?' }
