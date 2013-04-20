@@ -25,6 +25,7 @@ class ServicesController < ApplicationController
   # GET /services/new.json
   def new
     @service = Service.new
+    @service.in_kind_donation = InKindDonation.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +36,9 @@ class ServicesController < ApplicationController
   # GET /services/1/edit
   def edit
     @service = Service.find(params[:id])
+    # raise @service.in_kind_donation.inspect
+    # @service.in_kind_donation = InKindDonation.new
+    @service.build_in_kind_donation if @service.in_kind_donation.blank?
   end
 
   # POST /services

@@ -30,6 +30,26 @@
       Trained
       = f.check_box :trained
     %br
+    %label.checkbox
+      Willing To Return
+      = f.check_box :willing_to_return
+    %br
+    %h3 In Kind Donation
+    = f.fields_for(:in_kind_donation) do |donation_form|
+      .field
+        = donation_form.label :date
+        = donation_form.text_field :date
+        = donation_form.label :description
+        = donation_form.text_field :description
+        = donation_form.label :dollar_value
+        = donation_form.text_field :dollar_value
+      - unless donation_form.object.nil? || donation_form.object.new_record?
+        .field
+          %label.checkbox
+            Remove In Kind Donation?
+            = donation_form.check_box :_destroy
+
+    = f.label :place_id, "Place"
     =f.collection_select(:place_id, Place.all, :id, :city)
     %h3 People
     =render partial: "shared/habtm_form", locals: {object: @service, association: "person", attribute: "name"}
