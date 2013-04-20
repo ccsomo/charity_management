@@ -21,7 +21,7 @@
     - Person.all.each do |person|
       %label.checkbox
         = person.name
-        = check_box_tag "person[represent_ids][]", person.id, person.represent_ids.include?(person.id), id: dom_id(person)
+        = check_box_tag "person[represent_ids][]", person.id, @person.represent_ids.include?(person.id), id: dom_id(person)
     %br
     =f.label :street
     =f.text_field :street
@@ -35,12 +35,17 @@
     =f.label :zip
     =f.text_field :zip
     %br
+    %h2 Cash Donations
+    - i = -1
+    = f.fields_for(:cash_donations) do |donation_form|
+      - i += 1
+      = render :partial => 'cash_donation_fields', :locals => {:f => donation_form}
+    = link_to_add_fields "Add Cash Donation", f, :cash_donations
     %h3 Skills
     =render partial: "shared/habtm_form", locals: {object: @person, association: "skill", attribute: "description"}
     %h3 Groups
     =render partial: "shared/habtm_form", locals: {object: @person, association: "group", attribute: "name"}
     %h3 Services
     =render partial: "shared/habtm_form", locals: {object: @person, association: "service", attribute: "description"}
-
   .actions
     = f.submit 'Save'
